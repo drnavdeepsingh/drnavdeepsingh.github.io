@@ -1,1 +1,597 @@
-Hello World!!!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 2019-08-26 Mon 20:12 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dealing with truth</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Dr. Navdeep Singh">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Dealing with truth</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgba86fd1">Index</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org18ae777">Introduction</a></li>
+<li><a href="#org69c441e">Why I'm writing this</a></li>
+<li><a href="#orgefdd1bc">My first experience</a></li>
+<li><a href="#orge0ef2c1">Dealing with actual situation</a></li>
+<li><a href="#org89836fa">Specific scenarios</a></li>
+</ul>
+</li>
+<li><a href="#org1dfc286">Introduction</a></li>
+<li><a href="#orgd0e76cd">Why I'm writing this?</a></li>
+<li><a href="#org81c2f13">My first experience</a></li>
+<li><a href="#org1dd32eb">Dealing with actual situations</a>
+<ul>
+<li><a href="#org99053fe">Firstly some general points</a></li>
+</ul>
+</li>
+<li><a href="#orgac1dd2c">Specific scenarios</a>
+<ul>
+<li><a href="#orgdef2425">Brought dead patient</a></li>
+<li><a href="#org27c3e6b">Patient about to die(expected)</a></li>
+<li><a href="#orgffb3751">Unexpected loss</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org768e2f2"></a></li>
+<li><a href="#org25995bd">License</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgba86fd1" class="outline-2">
+<h2 id="orgba86fd1">Index</h2>
+<div class="outline-text-2" id="text-orgba86fd1">
+</div>
+<div id="outline-container-org18ae777" class="outline-4">
+<h4 id="org18ae777">Introduction</h4>
+</div>
+<div id="outline-container-org69c441e" class="outline-4">
+<h4 id="org69c441e">Why I'm writing this</h4>
+</div>
+<div id="outline-container-orgefdd1bc" class="outline-4">
+<h4 id="orgefdd1bc">My first experience</h4>
+</div>
+<div id="outline-container-orge0ef2c1" class="outline-4">
+<h4 id="orge0ef2c1">Dealing with actual situation</h4>
+</div>
+<div id="outline-container-org89836fa" class="outline-4">
+<h4 id="org89836fa">Specific scenarios</h4>
+</div>
+
+<div id="outline-container-org1dfc286" class="outline-3">
+<h3 id="org1dfc286">Introduction</h3>
+<div class="outline-text-3" id="text-org1dfc286">
+<p>
+Death according to oxford dictionary is permanent ending of vital
+processes in a cell or tissue. But is it that simple? Is it just
+the non-functioning of brain or is it just the stopping of all the
+metabolic processes of life in a cell? I believe it is bigger than
+that. It is an inevitable truth of life.  Hospitals are the place
+where people come during illness and sometimes situation is very
+critical. We give our best to save the lives but the truth is that
+sometimes the unwanted is unavoidable. As the pleasure of saving
+someone is immeasurable so is the sorrow of loosing someone. Even
+if we know our patient for a very short duration still there is a
+bond. When we lose a patient we have to quickly get over that
+sorrow so that we can move to the next patient.  As the years in
+this profession increases, as we see more such situations the time
+needed to get over reduces. But the families of the decreased are
+not used to such situations. It is shocking for them. We should
+know how to communicate with them.  Here we are going to talk about
+dealing with situation after death.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd0e76cd" class="outline-3">
+<h3 id="orgd0e76cd">Why I'm writing this?</h3>
+<div class="outline-text-3" id="text-orgd0e76cd">
+<p>
+Patient presented with head injury &amp; polytrauma, GCS is 3/15,
+B.P. unrecordable. What will you do next? Patient presented with
+chest pain, shortness of breath, bilateral crepts in chest, ST
+elevation, trop T positive, not maintaining B.P. and
+saturation. How to proceed?  There could be thousands of such
+scenarios and answer to those can be found in one book or
+another. But sometimes with our best efforts we could not save the
+life.  Five and half years at medical college and five years of job
+but I could not find a book that can teach me how to tell the
+family that their patient is no more. Being a doctor was never an
+easy job but this is the most difficult thing I experienced.  I
+learned from my experiences, my colleagues and foremost from my
+patients. Here I am going to share few things that I have learned.
+I hope they help you.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org81c2f13" class="outline-3">
+<h3 id="org81c2f13">My first experience</h3>
+<div class="outline-text-3" id="text-org81c2f13">
+<p>
+My first experience of declaring someone was from the medical
+college, but here I will tell you about my first experience after
+becoming MEDICAL OFFICER.  You probably be thinking — what’ the
+difference? Well at the medical college you have seniors, nurses,
+paramedical staff and a different kind of setup. When you work as
+medical officer the scenario is totally different. You work alone
+and you make individual decisions.  Coming to my experience One
+evening I was called to see an elderly woman at her home. I was not
+doing anything, so I went to see the patient. On seeing her lying
+on the floor I knew that nothing could be done, but still wanting
+to be sure I looked for pulse. There was no peripheral pulse, so I
+looked for central pulse. They were absent. No breathing can be
+seen and her heart was not beating. I looked for pupils they were
+dilated and fixed. Now I was sure that she was no more, but I was
+afraid to tell. I double-checked then triple checked. I didn’t want
+to miss anything. It took me almost 15 min to gather enough courage
+to inform them.  What did I say? NOTHING. I could not utter a
+word. I just moved my head sideways. I left their home after few
+minutes. As soon as I entered my room a thought hit me- what if she
+is alive? What if I missed something? These thoughts started their
+own vicious cycle that kept me awake the whole night. Its morning
+but still the same thoughts were going in my head. I couldn’t eat
+the breakfast. I couldn’t sit in my office.  It was around 1pm when
+her body was brought for cremation. I went to the cremation. I saw
+the whole process cross fingered. The stress was too much to
+bear. After the pile of wood and the body in it were consumed by
+fire I had a breath of relief.  I was sure from the beginning but
+the anxiety was because it was the first time when I had to take
+the decision on my own. No one was there to stand with me or
+against me, and hence I had to stand alone for myself.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1dd32eb" class="outline-3">
+<h3 id="org1dd32eb">Dealing with actual situations</h3>
+<div class="outline-text-3" id="text-org1dd32eb">
+<p>
+When we encounter death of a patient it could be either brought dead
+or death at hospital. In the later one it could be the expected or
+unexpected one. We will deal with all three one by one.
+</p>
+</div>
+
+<div id="outline-container-org99053fe" class="outline-4">
+<h4 id="org99053fe">Firstly some general points</h4>
+<div class="outline-text-4" id="text-org99053fe">
+</div>
+<ul class="org-ul">
+<li><a id="org8dc9a07"></a>Make a rapport with the family.<br>
+<div class="outline-text-5" id="text-org8dc9a07">
+<p>
+Talk to the family; get a brief idea of -all those accompanying the
+patient, where they came from, and their livelihood.
+</p>
+</div>
+</li>
+
+<li><a id="orgf1580b2"></a>Identify one person.<br>
+<div class="outline-text-5" id="text-orgf1580b2">
+<p>
+Choose one person preferably male adult from the family or very close
+to family. That will be the person with whom you will share all the
+details. Make sure that person understands what you say.
+</p>
+</div>
+</li>
+
+<li><a id="org4081107"></a>Always look serious.<br>
+<div class="outline-text-5" id="text-org4081107">
+<p>
+Patient may be less sick or more sick, situation might be usual
+for you because you are daily seeing patients but the situation
+is not usual for the family members. So act serious for them that
+way they will trust you more.
+</p>
+</div>
+</li>
+
+<li><a id="org5a227f4"></a>Communicate<br>
+<div class="outline-text-5" id="text-org5a227f4">
+<p>
+Communicate with the identified person only after initial
+assessment. Tell him about the worst possible and best possible
+scenario. Discuss about the line of management possible and
+available. Tell about the possible alternatives. Never communicate
+with bunch of people, just one identified person and let him tell it
+to the rest. Answer his queries according to availability of time.
+</p>
+</div>
+</li>
+
+<li><a id="org4c6cea7"></a>Gather help<br>
+<div class="outline-text-5" id="text-org4c6cea7">
+<p>
+If possible ask other doctor to accompany you when situation is critical
+</p>
+</div>
+</li>
+
+<li><a id="org3fa26b4"></a>Understanding situation<br>
+<div class="outline-text-5" id="text-org3fa26b4">
+<p>
+When the situation worsens inform immediately but when situation
+improves then take your time to confirm, its better not to give
+false hopes
+</p>
+</div>
+</li>
+
+<li><a id="orgab2f48a"></a>Take your time<br>
+<div class="outline-text-5" id="text-orgab2f48a">
+<p>
+Always take time to declare. Decide firsthand how you are going to
+tell.
+</p>
+</div>
+</li>
+
+<li><a id="org74c4fa5"></a>Be 100% sure<br>
+<div class="outline-text-5" id="text-org74c4fa5">
+<p>
+Get an ECG done. Always make sure to get a flat line ECG before
+declaring. That is always good documentary evidence.
+</p>
+</div>
+</li>
+
+<li><a id="org825521c"></a>Telling<br>
+<div class="outline-text-5" id="text-org825521c">
+<p>
+The moment you got flat line ECG and you have attempted
+resuscitation. Now you have to inform this to family.
+</p>
+</div>
+<ul class="org-ul">
+<li><a id="org0d82198"></a>never try to hurry the things.<br></li>
+<li><a id="org6c57d3a"></a>never ever attempt to tell in front of several persons.<br></li>
+<li><a id="org3b96b71"></a>ask the identified person to come<br></li>
+<li><a id="org5be4e75"></a>make him/her sit.<br></li>
+<li><a id="orga834bc1"></a>ask him/her about what happened<br></li>
+<li><a id="org2b78f2e"></a>tell him/her briefly about what you did<br></li>
+<li><a id="orga6454c6"></a>conclude by saying that “your patient could not be saved”<br></li>
+<li><a id="org097798b"></a>Let the information sink in<br></li>
+<li><a id="org012c963"></a>He might have queries, answer them.<br></li>
+</ul>
+</li>
+
+<li><a id="orga73a204"></a>No blame game<br>
+<div class="outline-text-5" id="text-orga73a204">
+<p>
+if in case there are any irregularities, deficiencies or some
+other issues never blame them for the loss of patients and never
+discuss them in front of family and friends.
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+
+
+
+<div id="outline-container-orgac1dd2c" class="outline-3">
+<h3 id="orgac1dd2c">Specific scenarios</h3>
+<div class="outline-text-3" id="text-orgac1dd2c">
+</div>
+<div id="outline-container-orgdef2425" class="outline-4">
+<h4 id="orgdef2425">Brought dead patient</h4>
+<div class="outline-text-4" id="text-orgdef2425">
+</div>
+<ul class="org-ul">
+<li><a id="org3019994"></a>Ask everyone to stay out after taking a brief history<br></li>
+<li><a id="org9817f1a"></a>Quick assessment of situation<br></li>
+<li><a id="orgfe51e9b"></a>Put up screens<br></li>
+<li><a id="orgc31348b"></a>Call all the available staff to come<br></li>
+<li><a id="org2d5728d"></a>Attempt resuscitation (unless you are sure that it has been hours since death)<br></li>
+<li><a id="org93ee7a5"></a>Inform the police<br></li>
+</ul>
+</div>
+
+<div id="outline-container-org27c3e6b" class="outline-4">
+<h4 id="org27c3e6b">Patient about to die(expected)</h4>
+<div class="outline-text-4" id="text-org27c3e6b">
+</div>
+<ul class="org-ul">
+<li><a id="org43f44cc"></a>Inform immediately to the family about the<br></li>
+<li><a id="org1237410"></a>Give them a wide view of scenario and available options like<br>
+<div class="outline-text-5" id="text-org1237410">
+<p>
+referral, treatment options available. Let them decide, do not
+decide for them.
+</p>
+</div>
+</li>
+<li><a id="orgc0ac1b3"></a>Gradually build up the scenario as the condition worsens<br></li>
+</ul>
+</div>
+
+<div id="outline-container-orgffb3751" class="outline-4">
+<h4 id="orgffb3751">Unexpected loss</h4>
+<div class="outline-text-4" id="text-orgffb3751">
+</div>
+<ul class="org-ul">
+<li><a id="org5708846"></a>These situations are the most difficult to handle. They need to<br>
+<div class="outline-text-5" id="text-org5708846">
+<p>
+be handled with utmost care and sincerity. There are lots of
+things still to be found in medical sciences, so we can never be
+sure. Always keep that in mind.
+</p>
+</div>
+</li>
+<li><a id="orga4d68f3"></a>Look for some probable diagnosis which you can communicate to the family<br></li>
+<li><a id="orgec1b619"></a>It is highly preferable that you ask some doctor to accompany you<br></li>
+<li><a id="orgfad1cd0"></a>Tale time before declaring and telling<br></li>
+<li><a id="org5fbde5c"></a>Attendants will be angry about the situation. Try to avoid any<br>
+<div class="outline-text-5" id="text-org5fbde5c">
+<p>
+unpleasant conversation. Remain polite and sincere in whole
+situation. After informing about the situation try moving away
+from the scene.
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org768e2f2" class="outline-2">
+<h2 id="org768e2f2"></h2>
+<div class="outline-text-2" id="text-org768e2f2">
+<p>
+<b>“YES I HAVE LOST A LOT OF PATIENTS, BUT WITH EVERY PATIENT I LOST I
+LEARNED HOW TO SAVE THE NEXT ONE”</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org25995bd" class="outline-2">
+<h2 id="org25995bd">License</h2>
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Dr. Navdeep Singh</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
+
